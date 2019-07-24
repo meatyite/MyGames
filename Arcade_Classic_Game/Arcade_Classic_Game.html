@@ -1,0 +1,187 @@
+<!--
+
+I AM SHUBHAM PATEL.
+I MADE THIS GAME BY TAKING REFERENCE, FROM AN ONLINE COURSE.
+NOW I CAN MODIFY THIS GAME, OR CAN MAKE OTHER GAMES.
+IF YOU HAVE ANY IDEAS FOR GAMES, FEEL FREE TO SHARE.
+AND IF YOU WANT TO HIRE ME, PLEASE GO TO https://www.linkedin.com/in/srpatel980/ (MY LINKEDIN PROFILE).
+
+-->
+
+<html>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+<script>
+	var canvas;
+	var context;
+	var ballX = 50;
+	var ballY = 50;
+	var ballSpeedX = 10;
+	var ballSpeedY = 4;
+	var paddle1Y = 250;
+	var paddle2Y = 250;
+	var player1Score = 0;
+	var player2Score = 0;
+	var showWinScreen = false;
+	const PADDLE_HEIGHT = 100;
+	const PADDLE_THICKNESS = 10;
+	const WINNING_SCORE = 3;
+	function calculateMousePos(evt)
+	{
+		var rect = canvas.getBoundingClientRect();
+		var root = document.documentElement;
+		var mouseX = evt.clientX - rect.left - root.scrollLeft;
+		var mouseY = evt.clientY - rect.top - root.scrollTop;
+		return {x:mouseX, y:mouseY};
+	}
+	function handleMouseClick()
+	{
+		if(showWinScreen)
+		{
+			player1Score = 0;
+			player2Score = 0;
+			showWinScreen = false;
+		}
+	}
+	window.onload = function()
+	{
+		//console.log("Hello, world!");
+		canvas = document.getElementById('gameCanvas');
+		context = canvas.getContext('2d');
+		var framesPerSecond = 30;
+		setInterval
+		(
+			function()
+			{
+				move();
+				draw();
+			},
+			1000/framesPerSecond
+		);
+		canvas.addEventListener('mousedown',handleMouseClick);
+		canvas.addEventListener
+		(
+			'mousemove',
+			function(evt)
+			{
+				var mousePos = calculateMousePos(evt);
+				paddle1Y = mousePos.y - (PADDLE_HEIGHT/2);
+			}
+		);
+	}
+	function ballReset()
+	{
+		if (player1Score >= WINNING_SCORE || player2Score >= WINNING_SCORE)
+		{
+			context.fillStyle = 'white';			
+			if (player1Score >= WINNING_SCORE)
+			{
+				context.fillText("You win!",415,420);
+			}
+			else if (player2Score >= WINNING_SCORE)
+			{
+				context.fillText("Computer wins",415,420);
+			}
+			player1Score = 0;
+			player2Score = 0;
+			showWinScreen = true;
+		}
+		ballSpeedX = -ballSpeedX
+		ballX = canvas.width/2;
+		ballY = canvas.height/2;
+	}
+	function computerMove()
+	{
+		var paddle2YCenter = paddle2Y + PADDLE_HEIGHT/2;
+		if (paddle2YCenter < ballY-35)
+		{
+			paddle2Y = paddle2Y + 6;
+		}
+		else if (paddle2YCenter > ballY+35)
+		{
+			paddle2Y = paddle2Y - 6;
+		}
+	}
+	function move()
+	{
+		if (showWinScreen)
+		{
+			return;
+		}
+		computerMove();
+		ballX = ballX + ballSpeedX;
+		ballY = ballY + ballSpeedY;
+		if (ballX > canvas.width)
+		{
+			if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT)
+			{
+				ballSpeedX = -ballSpeedX;
+				var deltaY = ballY - (paddle2Y + PADDLE_HEIGHT/2);
+				ballSpeedY = deltaY * 0.35;
+			}
+			else
+			{
+				player1Score++;
+				ballReset();
+			}
+		}
+		if (ballX < 0)
+		{
+			if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT)
+			{
+				ballSpeedX = -ballSpeedX;
+				var deltaY = ballY - (paddle1Y + PADDLE_HEIGHT/2);
+				ballSpeedY = deltaY * 0.35;
+			}
+			else
+			{
+				player2Score++;
+				ballReset();
+			}
+		}
+		if (ballY > canvas.height)
+		{
+			ballSpeedY = -ballSpeedY;
+		}
+		if (ballY < 0)
+		{
+			ballSpeedY = -ballSpeedY;
+		}
+	}
+	function drawNet()
+	{
+		for (var i = 0; i < canvas.height; i+=40)
+		{
+			colorRect(canvas.width/2-1, i, 2, 20, 'white');
+		}
+	}
+	function draw()
+	{
+		if (showWinScreen)
+		{
+			context.fillStyle = 'white';
+			context.fillText("Click to continue", 415, 400);
+			return;
+		}
+		
+		colorRect(0, 0, canvas.width, canvas.height, 'black'); // Draw a black canvas
+		drawNet();
+		colorRect(0, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white'); // Draw a paddle for player1
+		colorRect(canvas.width-PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');// Draw a paddle for computer
+		colorCircle(ballX, ballY, 10, 'white');
+		context.fillText("Your score: " + player1Score + " ", 120, 100);
+		context.fillText("Computer's score: " + player2Score + " ", canvas.width-120, 100);
+	}
+	function colorCircle(centerX, centerY, radius, drawColor)
+	{
+		context.fillStyle = drawColor;
+		context.beginPath();
+		context.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+		context.fill();
+	}
+	function colorRect(leftX, topY, width, height, drawColor)
+	{
+		context.fillStyle = drawColor;
+		context.fillRect(leftX, topY, width, height);
+	}
+</script>
+</html>
