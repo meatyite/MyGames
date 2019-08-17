@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tic-Tac-Toe</title>
+		<style>
+			body
+			{
+				margin: 0;
+				padding: 0;
+			}
+			td
+			{
+				display: inline-block;
+				background-color: black;
+				height: 100px;
+				width: 100px;
+				margin: 5px;
+			}
+			tr
+			{
+				
+			}
+			#container
+			{
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container" align=center>
+			<table>
+				<caption>Player <span id="turn">Green</span>'s turn</caption>
+				<tr>
+					<td id='b1' onclick="click1()"></td>
+					<td id='b2' onclick="click2()"></td>
+					<td id='b3' onclick="click3()"></td>
+				</tr>
+				<tr>
+					<td id='b4' onclick="click4()"></td>
+					<td id='b5' onclick="click5()"></td>
+					<td id='b6' onclick="click6()"></td>
+				</tr>
+				<tr>
+					<td id='b7' onclick="click7()"></td>
+					<td id='b8' onclick="click8()"></td>
+					<td id='b9' onclick="click9()"></td>
+				</tr>
+			</table>
+			<span id="footer"></span>
+			<span id='result'></span>
+			<br>
+			<button onclick="restart()">Restart</button>
+		</div>
+		<script>
+			let ticks = 0;
+			let turn = "Green";
+			let player = 1;
+			let grid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+			let play = true;
+			function restart()
+			{
+				ticks = 0;
+				turn = "Green";
+				player = 1;
+				for(let i = 0; i < 10; i++)
+					grid[i] = 0;
+				play = true;
+				document.getElementById('footer').innerHTML = '';
+				document.getElementById('result').innerHTML = '';
+				document.getElementById('b1').style.background = 'black';
+				document.getElementById('b2').style.background = 'black';
+				document.getElementById('b3').style.background = 'black';
+				document.getElementById('b4').style.background = 'black';
+				document.getElementById('b5').style.background = 'black';
+				document.getElementById('b6').style.background = 'black';
+				document.getElementById('b7').style.background = 'black';
+				document.getElementById('b8').style.background = 'black';
+				document.getElementById('b9').style.background = 'black';
+			}
+			function click1()
+			{
+				if(grid[1] == 0 && play)
+				{
+					grid[1] = player;
+					document.getElementById('b1').style.background = turn;
+					player = player == 1 ? 2 : 1;
+					turn = turn == 'Green' ? 'Red' : 'Green';
+					document.getElementById('footer').innerHTML = '';
+					document.getElementById('turn').innerHTML = turn;
+					ticks++;
+					if(ticks == 9)
+					{
+						document.getElementById('result').innerHTML = 'Game draw!';
+					}
+					if((grid[1] == 1 && grid[2] == 1 && grid[3] == 1) || (grid[4] == 1 && grid[5] == 1 && grid[6] == 1) || (grid[7] == 1 && grid[8] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[4] == 1 && grid[7] == 1) || (grid[2] == 1 && grid[5] == 1 && grid[8] == 1) || (grid[3] == 1 && grid[6] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[5] == 1 && grid[9] == 1) || (grid[3] == 1 && grid[5] == 1 && grid[7] == 1))
+					{
+						document.getElementById('result').innerHTML = 'Player Green won!';
+						play = false;
+					}
+					if((grid[1] == 2 && grid[2] == 2 && grid[3] == 2) || (grid[4] == 2 && grid[5] == 2 && grid[6] == 2) || (grid[7] == 2 && grid[8] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[4] == 2 && grid[7] == 2) || (grid[2] == 2 && grid[5] == 2 && grid[8] == 2) || (grid[3] == 2 && grid[6] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[5] == 2 && grid[9] == 2) || (grid[3] == 2 && grid[5] == 2 && grid[7] == 2))
+					{
+						document.getElementById('result').innerHTML = 'Player Red won!';
+						play = false;
+					}
+				}
+				else
+				{
+					document.getElementById('footer').innerHTML = 'Invalid move!';
+				}
+			}
+			function click2()
+			{
+				if(grid[2] == 0 && play)
+				{
+					grid[2] = player;
+					document.getElementById('b2').style.background = turn;
+					player = player == 1 ? 2 : 1;
+					turn = turn == 'Green' ? 'Red' : 'Green';
+					document.getElementById('footer').innerHTML = '';
+					document.getElementById('turn').innerHTML = turn;
+					ticks++;
+					if(ticks == 9)
+					{
+						document.getElementById('result').innerHTML = 'Game draw!';
+					}
+					if((grid[1] == 1 && grid[2] == 1 && grid[3] == 1) || (grid[4] == 1 && grid[5] == 1 && grid[6] == 1) || (grid[7] == 1 && grid[8] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[4] == 1 && grid[7] == 1) || (grid[2] == 1 && grid[5] == 1 && grid[8] == 1) || (grid[3] == 1 && grid[6] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[5] == 1 && grid[9] == 1) || (grid[3] == 1 && grid[5] == 1 && grid[7] == 1))
+					{
+						document.getElementById('result').innerHTML = 'Player Green won!';
+						play = false;
+					}
+					if((grid[1] == 2 && grid[2] == 2 && grid[3] == 2) || (grid[4] == 2 && grid[5] == 2 && grid[6] == 2) || (grid[7] == 2 && grid[8] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[4] == 2 && grid[7] == 2) || (grid[2] == 2 && grid[5] == 2 && grid[8] == 2) || (grid[3] == 2 && grid[6] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[5] == 2 && grid[9] == 2) || (grid[3] == 2 && grid[5] == 2 && grid[7] == 2))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Red won!';
+					}
+				}
+				else
+				{
+					document.getElementById('footer').innerHTML = 'Invalid move!';
+				}
+			}
+			function click3()
+			{
+				if(grid[3] == 0 && play)
+				{
+					grid[3] = player;
+					document.getElementById('b3').style.background = turn;
+					player = player == 1 ? 2 : 1;
+					turn = turn == 'Green' ? 'Red' : 'Green';
+					document.getElementById('footer').innerHTML = '';
+					document.getElementById('turn').innerHTML = turn;
+					ticks++;
+					if(ticks == 9)
+					{
+						document.getElementById('result').innerHTML = 'Game draw!';
+					}
+					if((grid[1] == 1 && grid[2] == 1 && grid[3] == 1) || (grid[4] == 1 && grid[5] == 1 && grid[6] == 1) || (grid[7] == 1 && grid[8] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[4] == 1 && grid[7] == 1) || (grid[2] == 1 && grid[5] == 1 && grid[8] == 1) || (grid[3] == 1 && grid[6] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[5] == 1 && grid[9] == 1) || (grid[3] == 1 && grid[5] == 1 && grid[7] == 1))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Green won!';
+					}
+					if((grid[1] == 2 && grid[2] == 2 && grid[3] == 2) || (grid[4] == 2 && grid[5] == 2 && grid[6] == 2) || (grid[7] == 2 && grid[8] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[4] == 2 && grid[7] == 2) || (grid[2] == 2 && grid[5] == 2 && grid[8] == 2) || (grid[3] == 2 && grid[6] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[5] == 2 && grid[9] == 2) || (grid[3] == 2 && grid[5] == 2 && grid[7] == 2))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Red won!';
+					}
+				}
+				else
+				{
+					document.getElementById('footer').innerHTML = 'Invalid move!';
+				}
+			}
+			function click4()
+			{
+				if(grid[4] == 0 && play)
+				{
+					grid[4] = player;
+					document.getElementById('b4').style.background = turn;
+					player = player == 1 ? 2 : 1;
+					turn = turn == 'Green' ? 'Red' : 'Green';
+					document.getElementById('footer').innerHTML = '';
+					document.getElementById('turn').innerHTML = turn;
+					ticks++;
+					if(ticks == 9)
+					{
+						document.getElementById('result').innerHTML = 'Game draw!';
+					}
+					if((grid[1] == 1 && grid[2] == 1 && grid[3] == 1) || (grid[4] == 1 && grid[5] == 1 && grid[6] == 1) || (grid[7] == 1 && grid[8] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[4] == 1 && grid[7] == 1) || (grid[2] == 1 && grid[5] == 1 && grid[8] == 1) || (grid[3] == 1 && grid[6] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[5] == 1 && grid[9] == 1) || (grid[3] == 1 && grid[5] == 1 && grid[7] == 1))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Green won!';
+					}
+					if((grid[1] == 2 && grid[2] == 2 && grid[3] == 2) || (grid[4] == 2 && grid[5] == 2 && grid[6] == 2) || (grid[7] == 2 && grid[8] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[4] == 2 && grid[7] == 2) || (grid[2] == 2 && grid[5] == 2 && grid[8] == 2) || (grid[3] == 2 && grid[6] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[5] == 2 && grid[9] == 2) || (grid[3] == 2 && grid[5] == 2 && grid[7] == 2))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Red won!';
+					}
+				}
+				else
+				{
+					document.getElementById('footer').innerHTML = 'Invalid move!';
+				}			
+			}
+			function click5()
+			{
+				if(grid[5] == 0 && play)
+				{
+					grid[5] = player;
+					document.getElementById('b5').style.background = turn;
+					player = player == 1 ? 2 : 1;
+					turn = turn == 'Green' ? 'Red' : 'Green';
+					document.getElementById('footer').innerHTML = '';
+					document.getElementById('turn').innerHTML = turn;
+					ticks++;
+					if(ticks == 9)
+					{
+						document.getElementById('result').innerHTML = 'Game draw!';
+					}
+					if((grid[1] == 1 && grid[2] == 1 && grid[3] == 1) || (grid[4] == 1 && grid[5] == 1 && grid[6] == 1) || (grid[7] == 1 && grid[8] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[4] == 1 && grid[7] == 1) || (grid[2] == 1 && grid[5] == 1 && grid[8] == 1) || (grid[3] == 1 && grid[6] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[5] == 1 && grid[9] == 1) || (grid[3] == 1 && grid[5] == 1 && grid[7] == 1))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Green won!';
+					}
+					if((grid[1] == 2 && grid[2] == 2 && grid[3] == 2) || (grid[4] == 2 && grid[5] == 2 && grid[6] == 2) || (grid[7] == 2 && grid[8] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[4] == 2 && grid[7] == 2) || (grid[2] == 2 && grid[5] == 2 && grid[8] == 2) || (grid[3] == 2 && grid[6] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[5] == 2 && grid[9] == 2) || (grid[3] == 2 && grid[5] == 2 && grid[7] == 2))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Red won!';
+					}
+				}
+				else
+				{
+					document.getElementById('footer').innerHTML = 'Invalid move!';
+				}
+			}
+			function click6()
+			{
+				if(grid[6] == 0 && play)
+				{
+					grid[6] = player;
+					document.getElementById('b6').style.background = turn;
+					player = player == 1 ? 2 : 1;
+					turn = turn == 'Green' ? 'Red' : 'Green';
+					document.getElementById('footer').innerHTML = '';
+					document.getElementById('turn').innerHTML = turn;
+					ticks++;
+					if(ticks == 9)
+					{
+						document.getElementById('result').innerHTML = 'Game draw!';
+					}
+					if((grid[1] == 1 && grid[2] == 1 && grid[3] == 1) || (grid[4] == 1 && grid[5] == 1 && grid[6] == 1) || (grid[7] == 1 && grid[8] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[4] == 1 && grid[7] == 1) || (grid[2] == 1 && grid[5] == 1 && grid[8] == 1) || (grid[3] == 1 && grid[6] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[5] == 1 && grid[9] == 1) || (grid[3] == 1 && grid[5] == 1 && grid[7] == 1))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Green won!';
+					}
+					if((grid[1] == 2 && grid[2] == 2 && grid[3] == 2) || (grid[4] == 2 && grid[5] == 2 && grid[6] == 2) || (grid[7] == 2 && grid[8] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[4] == 2 && grid[7] == 2) || (grid[2] == 2 && grid[5] == 2 && grid[8] == 2) || (grid[3] == 2 && grid[6] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[5] == 2 && grid[9] == 2) || (grid[3] == 2 && grid[5] == 2 && grid[7] == 2))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Red won!';
+					}
+				}
+				else
+				{
+					document.getElementById('footer').innerHTML = 'Invalid move!';
+				}
+			}
+			function click7()
+			{
+				if(grid[7] == 0 && play)
+				{
+					grid[7] = player;
+					document.getElementById('b7').style.background = turn;
+					player = player == 1 ? 2 : 1;
+					turn = turn == 'Green' ? 'Red' : 'Green';
+					document.getElementById('footer').innerHTML = '';
+					document.getElementById('turn').innerHTML = turn;
+					ticks++;
+					if(ticks == 9)
+					{
+						document.getElementById('result').innerHTML = 'Game draw!';
+					}
+					if((grid[1] == 1 && grid[2] == 1 && grid[3] == 1) || (grid[4] == 1 && grid[5] == 1 && grid[6] == 1) || (grid[7] == 1 && grid[8] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[4] == 1 && grid[7] == 1) || (grid[2] == 1 && grid[5] == 1 && grid[8] == 1) || (grid[3] == 1 && grid[6] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[5] == 1 && grid[9] == 1) || (grid[3] == 1 && grid[5] == 1 && grid[7] == 1))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Green won!';
+					}
+					if((grid[1] == 2 && grid[2] == 2 && grid[3] == 2) || (grid[4] == 2 && grid[5] == 2 && grid[6] == 2) || (grid[7] == 2 && grid[8] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[4] == 2 && grid[7] == 2) || (grid[2] == 2 && grid[5] == 2 && grid[8] == 2) || (grid[3] == 2 && grid[6] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[5] == 2 && grid[9] == 2) || (grid[3] == 2 && grid[5] == 2 && grid[7] == 2))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Red won!';
+					}
+				}
+				else
+				{
+					document.getElementById('footer').innerHTML = 'Invalid move!';
+				}
+			}
+			function click8()
+			{
+				if(grid[8] == 0 && play)
+				{
+					grid[8] = player;
+					document.getElementById('b8').style.background = turn;
+					player = player == 1 ? 2 : 1;
+					turn = turn == 'Green' ? 'Red' : 'Green';
+					document.getElementById('footer').innerHTML = '';
+					document.getElementById('turn').innerHTML = turn;
+					ticks++;
+					if(ticks == 9)
+					{
+						document.getElementById('result').innerHTML = 'Game draw!';
+					}
+					if((grid[1] == 1 && grid[2] == 1 && grid[3] == 1) || (grid[4] == 1 && grid[5] == 1 && grid[6] == 1) || (grid[7] == 1 && grid[8] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[4] == 1 && grid[7] == 1) || (grid[2] == 1 && grid[5] == 1 && grid[8] == 1) || (grid[3] == 1 && grid[6] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[5] == 1 && grid[9] == 1) || (grid[3] == 1 && grid[5] == 1 && grid[7] == 1))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Green won!';
+					}
+					if((grid[1] == 2 && grid[2] == 2 && grid[3] == 2) || (grid[4] == 2 && grid[5] == 2 && grid[6] == 2) || (grid[7] == 2 && grid[8] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[4] == 2 && grid[7] == 2) || (grid[2] == 2 && grid[5] == 2 && grid[8] == 2) || (grid[3] == 2 && grid[6] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[5] == 2 && grid[9] == 2) || (grid[3] == 2 && grid[5] == 2 && grid[7] == 2))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Red won!';
+					}
+				}
+				else
+				{
+					document.getElementById('footer').innerHTML = 'Invalid move!';
+				}
+			}
+			function click9()
+			{
+				if(grid[9] == 0 && play)
+				{
+					grid[9] = player;
+					document.getElementById('b9').style.background = turn;
+					player = player == 1 ? 2 : 1;
+					turn = turn == 'Green' ? 'Red' : 'Green';
+					document.getElementById('footer').innerHTML = '';
+					document.getElementById('turn').innerHTML = turn;
+					ticks++;
+					if(ticks == 9)
+					{
+						document.getElementById('result').innerHTML = 'Game draw!';
+					}
+					if((grid[1] == 1 && grid[2] == 1 && grid[3] == 1) || (grid[4] == 1 && grid[5] == 1 && grid[6] == 1) || (grid[7] == 1 && grid[8] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[4] == 1 && grid[7] == 1) || (grid[2] == 1 && grid[5] == 1 && grid[8] == 1) || (grid[3] == 1 && grid[6] == 1 && grid[9] == 1) || (grid[1] == 1 && grid[5] == 1 && grid[9] == 1) || (grid[3] == 1 && grid[5] == 1 && grid[7] == 1))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Green won!';
+					}
+					if((grid[1] == 2 && grid[2] == 2 && grid[3] == 2) || (grid[4] == 2 && grid[5] == 2 && grid[6] == 2) || (grid[7] == 2 && grid[8] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[4] == 2 && grid[7] == 2) || (grid[2] == 2 && grid[5] == 2 && grid[8] == 2) || (grid[3] == 2 && grid[6] == 2 && grid[9] == 2) || (grid[1] == 2 && grid[5] == 2 && grid[9] == 2) || (grid[3] == 2 && grid[5] == 2 && grid[7] == 2))
+					{
+						play = false;
+						document.getElementById('result').innerHTML = 'Player Red won!';
+					}
+				}
+				else
+				{
+					document.getElementById('footer').innerHTML = 'Invalid move!';
+				}
+			}
+		</script>
+	</body>
+</html>
