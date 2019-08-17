@@ -1,7 +1,10 @@
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<title>Tic-Tac-Toe</title>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
 		<style>
 			body
 			{
@@ -25,25 +28,26 @@
 				margin: 0;
 			}
 		</style>
+
 	</head>
 	<body>
 		<div id="container" align=center>
 			<table>
 				<caption>Player <span id="turn">Green</span>'s turn</caption>
 				<tr>
-					<td id='b1' onclick="click(1)"></td>
-					<td id='b2' onclick="click(2)"></td>
-					<td id='b3' onclick="click(3)"></td>
+					<td id='b1' onclick="click(1);"></td>
+					<td id='b2' onclick="click(2);"></td>
+					<td id='b3' onclick="click(3);"></td>
 				</tr>
 				<tr>
-					<td id='b4' onclick="click(4)"></td>
+					<td id='b4' onclick="click(4);"></td>
 					<td id='b5' onclick="click(5)"></td>
 					<td id='b6' onclick="click(6)"></td>
 				</tr>
 				<tr>
-					<td id='b7' onclick="click(7)"></td>
-					<td id='b8' onclick="click(8)"></td>
-					<td id='b9' onclick="click(9)"></td>
+					<td id='b7' onclick="click(7);"></td>
+					<td id='b8' onclick="click(8);"></td>
+					<td id='b9' onclick="click(9);"></td>
 				</tr>
 			</table>
 			<span id="footer"></span>
@@ -57,6 +61,7 @@
 			let player = 1;
 			let grid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 			let play = true;
+			
 			function restart()
 			{
 				ticks = 0;
@@ -79,12 +84,12 @@
 			}
 			
 			
-			function click(int gridIndex)
+			function click(gridIndex)
 			{
 				if(grid[gridIndex] == 0 && play)
 				{
 					grid[gridIndex] = player;
-					document.getElementById('b1').style.background = turn;
+					document.getElementById('b' + gridIndex.toString()).style.background = turn;
 					player = player == 1 ? 2 : 1;
 					turn = turn == 'Green' ? 'Red' : 'Green';
 					document.getElementById('footer').innerHTML = '';
